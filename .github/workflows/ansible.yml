@@ -1,0 +1,56 @@
+name: Provision of ec2
+
+on:
+ push:
+  branches:
+    - main
+
+jobs:
+ provision_ec2:
+  runs_on: ubuntu-latest
+
+  steps:
+   - name: checkout repo
+     uses: actions/checkout@v2
+  
+  steps:
+  - name: setup python 3.x
+    uses: actions/setup-python@v2
+    with:
+     python-version: "3.10"
+
+  steps: 
+  - name: install dependecies
+    run: |
+     python -m install pip --upgrade pip
+     pip install ansible boto3
+     ansible-galaxy collection install amazon.aws    
+
+  steps:
+  - name: Configure Aws credentials
+    uses: aws-actions/configure-aws-credentials@v1
+    with:
+    aws-access-key-id: ${{secrets. }}
+    aws-secret-access-key-id: ${{secrets. }}
+    default-region: ap-south-1
+
+  steps: 
+  - name: create ssh key
+    run: |
+     mkdir -p ~./ssh
+     echo "${{secrets.EC2_SSH_PRIVATE_KEY}}" > ~./ssh/ec2_key.pem
+     chmod 600  ~./ssh/ec2_key.pem
+  
+  - name: Debug ssh key
+    run: ls -l ~./ssh/ec2_key.pem
+
+
+ 
+
+
+
+
+
+
+
+   
