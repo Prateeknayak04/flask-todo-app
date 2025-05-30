@@ -43,7 +43,7 @@ jobs:
 
    - name: Run ansible playbook
      run: |
-      ansible-playbook/ansible/playbook/provisioning_of_instance.yml \ 
+      ansible-playbook ansible/playbook/provisioning_of_instance.yml \ 
       -e "ec2_ssh_key_path=~/.ssh/ec2_key.pem"
 
 
