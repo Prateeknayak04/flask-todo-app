@@ -20,7 +20,7 @@ jobs:
 
    - name: install dependecies
      run: |
-      python -m install pip --upgrade pip
+      python -m pip install --upgrade pip
       pip install ansible boto3
       ansible-galaxy collection install amazon.aws    
 
