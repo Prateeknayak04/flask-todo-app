@@ -3,8 +3,8 @@
   gather_facts: true
 
   tasks:
-  - name: creating a security group
-    amazon.aws.ec2_security_group:
+    - name: creating a security group
+      amazon.aws.ec2_security_group:
         name: todo-security
         description: creating a security group for ec2 instance
         rules:
@@ -23,10 +23,10 @@
         rules_egress:
             - proto: all
               cidr_ip: 0.0.0.0/0
-    register: ec2_security
+      register: ec2_security
 
-  - name: Lunching a ec2 instance
-    amazon.aws.ec2_instance:
+    - name: Lunching a ec2 instance
+      amazon.aws.ec2_instance:
         name: todo-app
         instance_type: t2.micro
         region: ap-south-1
@@ -35,41 +35,41 @@
         security_group: "{{ ec2_security.group_id }}"
 
         count: 1
-    register: ec2
+      register: ec2
 
-  - name: wait for the instance to lunch.
-    wait_for:
-    host: "{{ ec2.instance[0].public_dns_name }}"
-    port: 22
-    delay: 30
-    timeout: 300
-    state: started
-    when: ec2.instance is defined and ec2.instance | length > 0
+    - name: wait for the instance to lunch.
+      wait_for:
+        host: "{{ ec2.instance[0].public_dns_name }}"
+        port: 22
+        delay: 30
+        timeout: 300
+        state: started
+      when: ec2.instance is defined and ec2.instance | length > 0
 
-  - name: Add ec2 instance to dynamic inventory
-    add_host:
-    name: "{{ ec2.instance[0].public_dns_name }}"
-    groups: lunched_ec2_instances
-    ansible_ssh_private_key_file: "{{ ec2_ssh_key_path }}"
-    ansible_user: ec2-user
+    - name: Add ec2 instance to dynamic inventory
+      add_host:
+        name: "{{ ec2.instance[1].public_dns_name }}"
+        groups: lunched_ec2_instances
+        ansible_ssh_private_key_file: "{{ ec2_ssh_key_path }}"
+        ansible_user: ec2-user
   
-  - name: debug ssh private key 
-    debug:
-    var: ec2_ssh_key_path
-  - name: debug dynamic inventory
-    debug:
-    var: groups['lunched_ec2_instances']
+    - name: debug ssh private key 
+      debug:
+      var: ec2_ssh_key_path
+    - name: debug dynamic inventory
+      debug:
+      var: groups['lunched_ec2_instances']
   
-  tasks:
-  - name: installing apache packages
-    become: yes
-    package:
-      name: httpd
-      state: present
-  - name: starting a the apache server
-    become: yes
-    service:
-      name: httpd
-      enabled: yes
+  # tasks:
+  # - name: installing apache packages
+  #   become: yes
+  #   package:
+  #     name: httpd
+  #     state: present
+  # - name: starting a the apache server
+  #   become: yes
+  #   service:
+  #     name: httpd
+  #     enabled: yes
 
 
