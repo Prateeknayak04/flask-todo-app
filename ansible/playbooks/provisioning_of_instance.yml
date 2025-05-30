@@ -55,10 +55,10 @@
   
     - name: debug ssh private key 
       debug:
-      var: ec2_ssh_key_path
+        var: ec2_ssh_key_path
     - name: debug dynamic inventory
       debug:
-      var: groups['lunched_ec2_instances']
+        var: groups['lunched_ec2_instances']
   
   # tasks:
   # - name: installing apache packages
