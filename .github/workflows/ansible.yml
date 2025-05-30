@@ -3,7 +3,7 @@ name: Provision of ec2
 on:
  push:
   branches:
-    - main
+    - master
 
 jobs:
  provision_ec2:
@@ -27,9 +27,9 @@ jobs:
    - name: Configure Aws credentials
      uses: aws-actions/configure-aws-credentials@v1
      with:
-      aws-access-key-id: ${{secrets. }}
-      aws-secret-access-key-id: ${{secrets. }}
-      default-region: ap-south-1
+       aws-access-key-id: ${{secrets. }}
+       aws-secret-access-key-id: ${{secrets. }}
+       default-region: ap-south-1
  
    - name: create ssh key
      run: |
