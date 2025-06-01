@@ -61,17 +61,35 @@
     - name: debug dynamic inventory
       debug:
         var: groups['lunched_ec2_instances']
-  
-  # tasks:
-  # - name: installing apache packages
-  #   become: yes
-  #   package:
-  #     name: httpd
-  #     state: present
-  # - name: starting a the apache server
-  #   become: yes
-  #   service:
-  #     name: httpd
-  #     enabled: yes
+
+- name: Installing the packages 
+  hosts: lunched_ec2_instances
+  gather_facts: yes
+  tasks:
+  - name: installing apache packages
+    become: yes
+    package:
+      name: httpd
+      state: present
+  - name: starting a the apache server
+    become: yes
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: copying the source code
+    become: yes
+    synchronize:
+      src: "{{playbook_dir}}/../../"
+      dest: "/opt/todo-app"
+      delete: yes
+      recursive: yes
+      rsync_opts:
+        - "--exclude: .github"
+        - "--exclude: ansible"
+        
+
+
+
 
 
