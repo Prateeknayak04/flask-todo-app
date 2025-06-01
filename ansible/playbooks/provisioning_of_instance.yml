@@ -85,8 +85,8 @@
       delete: yes
       recursive: yes
       rsync_opts:
-        - "--exclude:.github"
-        - "--exclude:ansible"
+        - "--exclude=.github"
+        - "--exclude=ansible"
         
 
 
