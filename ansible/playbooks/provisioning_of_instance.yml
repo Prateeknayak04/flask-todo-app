@@ -35,7 +35,7 @@
         key_name: test-demo
         security_group: "{{ ec2_security.group_id }}"
         count: 1
-        network_interfaces:
+        network_interfaces_ids:
           assign_public_ip: true
       register: ec2
 
