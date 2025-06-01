@@ -80,13 +80,13 @@
   - name: copying the source code
     become: yes
     synchronize:
-      src: "{{playbook_dir}}/../../"
+      src: "{{ playbook_dir }}/../../"
       dest: "/opt/todo-app"
       delete: yes
       recursive: yes
       rsync_opts:
-        - "--exclude: .github"
-        - "--exclude: ansible"
+        - "--exclude:.github"
+        - "--exclude:ansible"
         
 
 
