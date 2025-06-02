@@ -88,10 +88,10 @@
         - "--exclude=.github"
         - "--exclude=ansible"
 
-  - name: Install dependecies from requirement.txt file
-    become: yes
-    ansible.builtin.runpip:
-      requirements: "/opt/todo-app/requirement.txt"
+  - name: Install dependencies from requirements.txt
+    ansible.builtin.pip:
+      requirements: /opt/todo-app/requirements.txt
+      executable: pip3
       # python: "/usr/bin/python3"
       state: present
 
