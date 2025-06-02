@@ -137,7 +137,7 @@
     become: true
     docker_image:
       build: 
-        path: "/opt/todo-app/Dockerfile"
+        path: "/opt/todo-app"
       name: todo-app
       tag: latest
       state: present
