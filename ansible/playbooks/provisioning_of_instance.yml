@@ -113,6 +113,13 @@
       state: present
     when: docker_installed is undefined
   
+  - name: Ensure Docker is started and enabled
+    become: true
+    ansible.builtin.service:
+      name: docker
+      state: started
+      enabled: true
+      
   - name: Build a docker iamge.
     docker_image:
       build: 
