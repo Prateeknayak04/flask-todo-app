@@ -145,11 +145,13 @@
 
   - name: run the docker container
     become: true
-    docker_container:
+    community.docker.docker_container:
       name: todo-app-container
       image: todo-app:latest
       state: started
-      ports: "5000:5000"
+      restart_policy: always
+      ports:
+        - "5000:5000"
     when: run_container is defined and run_container == true
 
   - name: verify the docker container is running
