@@ -122,7 +122,7 @@
   - name: verify the docker container is running
     shell: docker ps -a | grep todo-app-container
     register: container_status
-    ignore_error: true
+    ignore_errors: true
   
   - name: Display the container container_status
     debug:
