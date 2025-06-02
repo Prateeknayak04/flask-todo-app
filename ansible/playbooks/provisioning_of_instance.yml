@@ -68,16 +68,16 @@
   hosts: lunched_ec2_instances
   gather_facts: yes
   tasks:
-  - name: installing apache packages and running on the server 
-    become: yes
-    package:
-      name: httpd
-      state: present
-  - name: starting a the apache server
-    become: yes
-    service:
-      name: httpd
-      enabled: yes
+  # - name: installing apache packages and running on the server 
+  #   become: yes
+  #   package:
+  #     name: httpd
+  #     state: present
+  # - name: starting a the apache server
+  #   become: yes
+  #   service:
+  #     name: httpd
+  #     enabled: yes
 
   - name: copying the source code
     become: yes
@@ -141,7 +141,7 @@
       name: todo-app
       tag: latest
       state: present
-    # when: build_image is defined and build_image == true
+    when: build_image is defined and build_image == true
 
   - name: run the docker container
     become: true
