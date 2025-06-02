@@ -99,9 +99,9 @@
   #   when: pip_version.rc !=0
 
 
-  - name: Install dependencies from requirements.txt
+  - name: Install dependencies from requirement.txt
     ansible.builtin.pip:
-      requirements: /opt/todo-app/requirements.txt
+      requirements: /opt/todo-app/requirement.txt
       executable: pip3
       # python: "/usr/bin/python3"
       state: present
