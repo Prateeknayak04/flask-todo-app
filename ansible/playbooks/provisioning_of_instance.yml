@@ -87,8 +87,45 @@
       rsync_opts:
         - "--exclude=.github"
         - "--exclude=ansible"
-        
 
+  - name: Install dependecies from requirement.txt file
+    become: yes
+    ansible.builtin.runpip:
+      requirements: "/opt/todo-app/requirement.txt"
+      python: "/usr/bin/python3"
+
+  - name: install docker 
+    become: yes
+    package:
+      name: docker.io
+      state: present
+    when: docker_installed is undefined
+  
+  - name: Build a docker iamge.
+    docker_image:
+      build: 
+        path: "/opt/todo-app/Dockerfile"
+      name: todo-app
+      tag: latest
+      state: present
+    when: build_image is defined and build_image == true
+
+  - name: run the docker container
+    docker_container:
+      name: todo-app-container
+      image: todo-app:latest
+      state: started
+      ports: "5000:5000"
+    when: run_container is defined and run_container == true
+
+  - name: verify the docker container is running
+    shell: docker ps -a | grep todo-app-container
+    register: container_status
+    ignore_error: true
+  
+  - name: Display the container container_status
+    debug:
+      msg: "{{ container_status.stdout }}"
 
 
 
