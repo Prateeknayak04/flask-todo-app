@@ -109,7 +109,7 @@
   - name: install docker 
     become: yes
     package:
-      name: docker.io
+      name: docker
       state: present
     when: docker_installed is undefined
   
