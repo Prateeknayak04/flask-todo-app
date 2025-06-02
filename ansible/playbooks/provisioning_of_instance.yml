@@ -30,7 +30,7 @@
       amazon.aws.ec2_instance:
         name: todo-app
         instance_type: t2.micro
-        region: ap-south-1b
+        region: ap-south-1a
         image_id: ami-0af9569868786b23a 
         key_name: test-demo
         security_group: "{{ ec2_security.group_id }}"
