@@ -31,7 +31,7 @@
         name: todo-app
         instance_type: t2.micro
         region: us-east-1
-        image_id: ami-0af9569868786b23a 
+        image_id: ami-0953476d60561c955
         key_name: test-demo
         security_group: "{{ ec2_security.group_id }}"
         count: 1
