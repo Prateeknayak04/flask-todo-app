@@ -89,6 +89,15 @@
       rsync_opts:
         - "--exclude=.github"
         - "--exclude=ansible"
+  - name: install pip 
+    become: yes
+    package:
+      name: python3-pip
+      state: present
+  - name: update pip
+    shell: pip3 install --upgrade pip
+    when: pip_version.rc !=0
+
 
   - name: Install dependencies from requirements.txt
     ansible.builtin.pip:
