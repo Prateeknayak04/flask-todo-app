@@ -93,6 +93,7 @@
     ansible.builtin.runpip:
       requirements: "/opt/todo-app/requirement.txt"
       python: "/usr/bin/python3"
+      state: present
 
   - name: install docker 
     become: yes
