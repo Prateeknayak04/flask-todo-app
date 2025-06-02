@@ -125,9 +125,9 @@
     register: container_status
     ignore_errors: true
   
-  - name: Display the container container_status
+  - name: Display the container container_status 
     debug:
-      msg: "{{ container_status.stdout }}"
+      var: "{{ container_status.stdout }}"
 
 
 
