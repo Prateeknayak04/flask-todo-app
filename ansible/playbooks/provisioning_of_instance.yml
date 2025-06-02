@@ -119,6 +119,19 @@
       name: docker
       state: started
       enabled: true
+  - name: Add ec2-user to the docker group
+    become: true
+    user:
+      name: ec2-user
+      groups: docker
+      append: yes
+
+  - name: Restart docker service
+    become: true
+    systemd:
+      name: docker
+      state: restarted
+
       
   - name: Build a docker iamge.
     become: true
