@@ -140,7 +140,7 @@
     when: run_container is defined and run_container == true
 
   - name: verify the docker container is running
-    become: yes
+    become: true
     shell: docker ps -a | grep todo-app-container
     register: container_status
     ignore_errors: true
