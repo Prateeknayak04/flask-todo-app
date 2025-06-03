@@ -39,7 +39,6 @@
         name: todo-app
         instance_type: t2.micro
         availability_zone: ap-south-1b
-        # region: ap-south-1
         image_id: ami-0af9569868786b23a 
         key_name: test-demo
         security_group: "{{ ec2_security.group_id }}"
@@ -97,21 +96,17 @@
       rsync_opts:
         - "--exclude=.github"
         - "--exclude=ansible"
+
   - name: install pip 
     become: yes
     package:
       name: python3-pip
       state: present
-  # - name: update pip
-  #   shell: pip3 install --upgrade pip
-  #   when: pip_version.rc !=0
-
 
   - name: Install dependencies from requirement.txt
     ansible.builtin.pip:
       requirements: /opt/todo-app/requirement.txt
       executable: pip3
-      # python: "/usr/bin/python3"
       state: present
 
   - name: install docker 
