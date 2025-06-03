@@ -165,7 +165,7 @@
   
   - name: Display the container container_status and
     debug:
-      var: "{{ container_status.stdout }}"
+      msg: "{{ container_status.stdout }}"
 
 
 
